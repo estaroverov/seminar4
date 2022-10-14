@@ -53,7 +53,7 @@ void CheckVal(int [] arr, int number)
         Console.WriteLine("no");
 }
 CheckVal(arr,10);
-
+//////////////////////////////Кегельбан//////////////////////
 int [,] FillArraySpaces(int len_x,int len_y)
 {
     int counter = 0;
@@ -73,6 +73,29 @@ int [,] FillArraySpaces(int len_x,int len_y)
     }
     return arr;
 }
+char[] Kegelban(int countKeg, int countBrosok, int[,] arr, int cols)
+{
+    char [] arrKeg = new char [countKeg];
+    for(int i=0;i<countKeg;i++)
+        arrKeg[i] = 'I';
+
+    int counter = 0;
+    int firstKeg;
+    int secondKeg;
+    
+    while(counter < countBrosok)
+    {
+        for (int i = 0; i < cols; i+=2)
+        {
+            firstKeg = arr[counter,i];
+            secondKeg = arr[counter,i+1];
+            for(int j = firstKeg-1; j<secondKeg;j++)
+                arrKeg[j] = '.';
+        }
+        counter ++;
+    }
+    return arrKeg;
+}
 void PrintIntArr1(int [,] arr)
 {
     foreach(int i in arr)
@@ -80,10 +103,21 @@ void PrintIntArr1(int [,] arr)
 
     Console.WriteLine();
 }
-int [,] initKeg = FillArraySpaces(1,2);
+void PrintCharArr(char [] arr)
+{
+    foreach(char i in arr)
+        Console.Write(i + " ");
 
-int [,] arr1 = FillArraySpaces(initKeg[0,1],2);
+    Console.WriteLine();
+}
+int cols = 2;
+int [,] initKeg = FillArraySpaces(1,cols);
+
+int [,] arr1 = FillArraySpaces(initKeg[0,1],cols);
 PrintIntArr1(initKeg);
+PrintIntArr1(arr1);
+char[] arr2 = Kegelban(initKeg[0,0], initKeg[0,1], arr1 , cols);
+PrintCharArr(arr2);
 
 
 
